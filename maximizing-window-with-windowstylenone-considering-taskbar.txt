@@ -1,6 +1,5 @@
 // https://blogs.msdn.microsoft.com/llobo/2006/08/01/maximizing-window-with-windowstylenone-considering-taskbar/
-public override void OnApplyTemplate()
-
+        public override void OnApplyTemplate()
         {
 
             System.IntPtr handle = (new WinInterop.WindowInteropHelper(this)).Handle;
@@ -8,7 +7,13 @@ public override void OnApplyTemplate()
             WinInterop.HwndSource.FromHwnd(handle).AddHook(new WinInterop.HwndSourceHook(WindowProc));
 
         }
-
+        
+        private void win_SourceInitialized(object sender, EventArgs e)
+        {
+           System.IntPtr handle = (new WinInterop.WindowInteropHelper(this)).Handle;
+           WinInterop.HwndSource.FromHwnd(handle).AddHook(new WinInterop.HwndSourceHook(WindowProc));
+        }
+        
         private static System.IntPtr WindowProc(
 
               System.IntPtr hwnd,
